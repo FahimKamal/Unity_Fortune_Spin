@@ -17,8 +17,24 @@ public class Demo : MonoBehaviour
     {
         uiSpinButton.onClick.AddListener(() =>
         {
+            pickerWheel.OnSpinStart(OnSpinStartEvent);
+            pickerWheel.OnSpinEnd(OnSpinEndEvent);
+            
+            uiSpinButton.interactable = false;
             uiSpinButtonText.text = "Spinning";
             pickerWheel.Spin();
         });
+    }
+
+    private void OnSpinEndEvent(WheelPiece wheelPiece)
+    {
+        Debug.Log("Spin ended: " + wheelPiece.Label + ", Amount: " + wheelPiece.Amount);
+        uiSpinButton.interactable = true;
+        uiSpinButtonText.text = "Spin";
+    }
+
+    private void OnSpinStartEvent()
+    {
+        Debug.Log("Spin started ...");
     }
 }
